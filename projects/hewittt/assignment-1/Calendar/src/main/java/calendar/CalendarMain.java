@@ -39,7 +39,7 @@ public class CalendarMain {
 		
 		 int startHour=15;
 		 int startMinute=30;
-		 int startDay=thisDay+1;  	
+		 int startDay=thisDay-1; //Bug #1 changed plus to minus
 		 int startMonth=thisMonth; 	
 		 int startYear=thisYear; 	
 		 String title="Birthday Party";
@@ -61,7 +61,7 @@ public class CalendarMain {
       // create another appointment
          startHour=14;
 		 startMinute=30;
-		 startDay=thisDay;  	
+		 startDay=thisDay;
 		 startMonth=thisMonth; 	
 		 startYear=thisYear; 	
 		 title="Class";

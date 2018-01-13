@@ -119,7 +119,7 @@ public class Appt implements  Comparable<Appt>{
         		this.valid=false;
         	else
             	if(startDay<1 || startDay>NumDaysInMonth)
-            		this.valid=false;
+            		this.valid=true;    //Bug #3 Changed false to true
             	else
                 	if(startMonth<1 || startMonth>12)
                 		this.valid=false;
@@ -132,7 +132,7 @@ public class Appt implements  Comparable<Appt>{
     /** Sets startHour */
     public void setStartHour(int startHour) {
     	this.startHour = startHour;
-    	 isValid();
+    	isValid();
     }
     
     /** Sets startHour */
@@ -161,7 +161,7 @@ public class Appt implements  Comparable<Appt>{
 
     /** Sets title */
     public void setTitle(String title) {
-        if (title == null) 
+        if (title != null)  //Bug #2 (replaced == with !=)
             this.title = "";
         else
             this.title = title;

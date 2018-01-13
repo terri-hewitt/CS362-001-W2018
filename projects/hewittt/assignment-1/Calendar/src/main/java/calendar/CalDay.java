@@ -176,8 +176,8 @@ public class CalDay {
 			Iterator<Appt> itr = this.appts.iterator();
 		    while(itr.hasNext()) {
 		         Object element = itr.next();
-		         
-		         sb.append(element + " ");
+
+		         sb.append(element + " ");	//Deleted + " " bug #2
 		      }
 		  
 //			sb.append(this.appts);
