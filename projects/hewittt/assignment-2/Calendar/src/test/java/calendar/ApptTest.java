@@ -176,6 +176,118 @@ public class ApptTest {
         assertEquals(2020, appt.getStartYear());
 //              assertEquals(false, appt.getValid());
     }
+
+    @Test
+	public void test06() throws Throwable {
+		int startHour = 2;
+		int startMinute = 300;
+		int startDay = 24;
+		int startMonth = 01;
+		int startYear = 2018;
+		String title = "Start minute error";
+		String description = "start minute.";
+		//Construct a new Appointment object with the initial data
+		Appt appt = new Appt(startHour,
+				startMinute,
+				startDay,
+				startMonth,
+				startYear,
+				title,
+				description);
+		// assertions
+		assertEquals(false, appt.getValid());
+	}
+
+	@Test
+	public void test07() throws Throwable {
+		int startHour = 2;
+		int startMinute = 30;
+		int startDay = 0;
+		int startMonth = 2;
+		int startYear = 2018;
+		String title = "Start day error";
+		String description = "start day.";
+		//Construct a new Appointment object with the initial data
+		Appt appt = new Appt(startHour,
+				startMinute,
+				startDay,
+				startMonth,
+				startYear,
+				title,
+				description);
+		// assertions
+		assertEquals(false, appt.getValid());
+	}
+
+	@Test
+	public void test08() throws Throwable {
+		int startHour = 2;
+		int startMinute = 30;
+		int startDay = 24;
+		int startMonth = 14;
+		int startYear = 2018;
+		String title = "Start month error";
+		String description = "start month.";
+		//Construct a new Appointment object with the initial data
+		Appt appt = new Appt(startHour,
+				startMinute,
+				startDay,
+				startMonth,
+				startYear,
+				title,
+				description);
+		// assertions
+		assertEquals(false, appt.getValid());
+	}
+	@Test
+	public void test09() throws Throwable {
+		int startHour = -2;
+		int startMinute = 30;
+		int startDay = 24;
+		int startMonth = 01;
+		int startYear = 2018;
+		String title = null;
+		String description = null;
+		//Construct a new Appointment object with the initial data
+		Appt appt = new Appt(startHour,
+				startMinute,
+				startDay,
+				startMonth,
+				startYear,
+				title,
+				description);
+		// assertions
+		appt.setRecurrence(null, 1, 1, 1);
+		assertEquals(1, appt.getRecurBy());
+		assertEquals(false, appt.getValid());
+		assertEquals(null, appt.toString());
+	}
+	@Test
+	public void test10() throws Throwable {
+		int startHour = 2;
+		int startMinute = 30;
+		int startDay = 1;
+		int startMonth = 30;
+		int startYear = 2018;
+		String title = "Start month error";
+		String description = "start month.";
+		//Construct a new Appointment object with the initial data
+		Appt appt = new Appt(startHour,
+				startMinute,
+				startDay,
+				startMonth,
+				startYear,
+				title,
+				description);
+		// assertions
+		assertEquals(false, appt.getValid());
+		appt.setStartMonth(20);
+		assertEquals(false, appt.getValid());
+	}
+//add more unit tests as you needed
+//add more unit tests as you needed
+//add more unit tests as you needed
+//add more unit tests as you needed
 //add more unit tests as you needed
 	
 }
