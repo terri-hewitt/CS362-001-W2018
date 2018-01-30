@@ -238,9 +238,9 @@ public class TimeTableTest {
 		LinkedList<Appt> listAppts = new LinkedList<Appt>();
 		GregorianCalendar today = new GregorianCalendar(thisYear, thisMonth, thisDay);
 		GregorianCalendar tomorrow = (GregorianCalendar) today.clone();
-		GregorianCalendar nextTenDays = (GregorianCalendar) today.clone();
+		GregorianCalendar nextTenMonths = (GregorianCalendar) today.clone();
 		tomorrow.add(Calendar.DAY_OF_MONTH, 1);
-		nextTenDays.add(Calendar.DAY_OF_MONTH, 10);
+		nextTenMonths.add(Calendar.MONTH, 10);
 
 		TimeTable timeTable = new TimeTable();
 		LinkedList<CalDay> calDays = new LinkedList<CalDay>();
@@ -262,10 +262,30 @@ public class TimeTableTest {
 				title,
 				description);
 		int vp[] = {1,2,3,4,5,6};
-		appt2.setRecurrence(vp, 2, 2, 10);
+
+		listAppts.add(appt2);
+		calDays = timeTable.getApptRange(listAppts, today, nextTenMonths);
+
+		appt2.setRecurrence(null, 1, 2, Appt.RECUR_BY_WEEKLY);
 		listAppts.add(appt2);
 
-		calDays = timeTable.getApptRange(listAppts, today, tomorrow);
+		calDays = timeTable.getApptRange(listAppts, today, nextTenMonths);
+		appt2.setRecurrence(vp, 2, 2, Appt.RECUR_BY_WEEKLY);
+		listAppts.add(appt2);
+
+		calDays = timeTable.getApptRange(listAppts, today, nextTenMonths);
+		appt2.setRecurrence(vp, 1, 2, Appt.RECUR_BY_WEEKLY);
+		listAppts.add(appt2);
+		calDays = timeTable.getApptRange(listAppts, today, nextTenMonths);
+
+		appt2.setRecurrence(vp, 1, 2, Appt.RECUR_BY_MONTHLY);
+		listAppts.add(appt2);
+		calDays = timeTable.getApptRange(listAppts, today, nextTenMonths);
+
+		appt2.setRecurrence(vp, 1, 2, Appt.RECUR_BY_YEARLY);
+		listAppts.add(appt2);
+		calDays = timeTable.getApptRange(listAppts, today, nextTenMonths);
+
 		calDays = timeTable.getApptRange(listAppts, tomorrow, today);
 		//	assertNotEquals(calDays,timeTable.getApptRange(listAppts, nextTenDays, today));
 	}
@@ -346,8 +366,8 @@ public class TimeTableTest {
 				title,
 				description);
 		int list[] = {1,2,3,4,5,6};
-		assertEquals(list, appt2.getRecurDays());
-		appt2.setRecurrence(list, 2, 2, 10);
+	//	assertEquals(list, appt2.getRecurDays());
+		appt2.setRecurrence(list, 2, 2, Appt.RECUR_BY_WEEKLY);
 		timeTable.getApptRange(listAppts, fewDaysAgo, tomorrow);
 
 		listAppts.add(appt1);
@@ -356,6 +376,7 @@ public class TimeTableTest {
 		listAppts.add(appt2);
 		timeTable.deleteAppt(listAppts, appt2);
 		timeTable.deleteAppt(listAppts, appt0);
+	//	assertEquals(false, listAppts.contains(appt2));
 		timeTable.permute(listAppts, list);
 			//	assertNotEquals(calDays,timeTable.getApptRange(listAppts, nextTenDays, today));
 	}

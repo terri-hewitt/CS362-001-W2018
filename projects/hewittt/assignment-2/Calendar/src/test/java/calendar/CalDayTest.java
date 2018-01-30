@@ -145,7 +145,7 @@ public class CalDayTest {
 		 assertEquals(0, calDays.get(0).getSizeAppts());
          for (int i = 0; i < calDays.size(); i++) {
              if (calDays.get(i).getSizeAppts() == 3) {
-                 assertEquals("\t --- 3/28/2018 --- \n" +
+                 assertEquals("\t --- 3/29/2018 --- \n" +
                          " --- -------- Appointments ------------ --- \n" +
                          "\n   2/28/2018 at 3:10 am , Another another party, This is another another party." +
                          "\n   2/28/2018 at 12:10 pm ,Party, This is my party." +
@@ -330,7 +330,54 @@ public class CalDayTest {
 
 		 assertEquals(false, appt.getValid());
 		 listAppts.add(appt);
-		 assertEquals(null, calDays.iterator());
+		 calDays.get(0).addAppt(appt);
+		 calDays.get(0).toString();
+		 calDays.get(0).iterator();
+		 assertNotEquals(null, calDays.get(0).iterator());
 	 }
-//add more unit tests as you needed
+    @Test
+    public void test07() throws Throwable {
+        Calendar rightnow = Calendar.getInstance();
+        //current month/year/date is today
+        int thisMonth = rightnow.get(Calendar.MONTH);
+        int thisYear = rightnow.get(Calendar.YEAR);
+        int thisDay = rightnow.get(Calendar.DAY_OF_MONTH);
+
+        LinkedList<Appt> listAppts = new LinkedList<Appt>();
+        GregorianCalendar today = new GregorianCalendar(thisYear, thisMonth, thisDay);
+        GregorianCalendar tomorrow = (GregorianCalendar) today.clone();
+        GregorianCalendar nextTwoMonths = (GregorianCalendar) today.clone();
+        tomorrow.add(Calendar.DAY_OF_MONTH, 1);
+        nextTwoMonths.add(Calendar.DAY_OF_MONTH, 2);
+        nextTwoMonths.add(Calendar.MONTH, 2);
+
+        TimeTable timeTable = new TimeTable();
+        LinkedList<CalDay> calDays = new LinkedList<CalDay>();
+        calDays = timeTable.getApptRange(listAppts, today, tomorrow);
+
+        assertEquals(true, calDays.get(0).getAppts().isEmpty());
+
+                 /*Add an appointment to calendar*/
+        int startHour = -200;
+        int startMinute = 10;
+        int startDay = 30;
+        int startMonth = 1;
+        int startYear = 2018;
+        String title = "Party";
+        String description = "This is my party.";
+        //Construct a new Appointment object with the initial data
+        Appt appt = new Appt(startHour,
+                startMinute,
+                startDay,
+                startMonth,
+                startYear,
+                title,
+                description);
+
+        assertEquals(false, appt.getValid());
+        listAppts.add(appt);
+        calDays.get(0).iterator();
+        assertEquals(null, calDays.get(0).toString());
+	 }
+      //add more unit tests as you needed
 }

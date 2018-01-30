@@ -284,10 +284,5 @@ public class ApptTest {
 		appt.setStartMonth(20);
 		assertEquals(false, appt.getValid());
 	}
-//add more unit tests as you needed
-//add more unit tests as you needed
-//add more unit tests as you needed
-//add more unit tests as you needed
-//add more unit tests as you needed
-	
+
 }
