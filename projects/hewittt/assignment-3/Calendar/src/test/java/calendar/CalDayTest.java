@@ -482,6 +482,7 @@ assertEquals("\t --- 3/29/2018 --- \n" +
 		listAppts.add(appt);
 		calDays.get(0).addAppt(appt);
 		appt.setRecurrence(r, Appt.RECUR_BY_WEEKLY, 0, Appt.RECUR_NUMBER_FOREVER);
+		assertEquals(61, timeTable.getApptRange(listAppts, today, nextTwoMonths).size());
 		assertEquals(false, timeTable.getApptRange(listAppts, today, nextTwoMonths).contains(appt));//size());
       //  assertEquals();
 		appt.setRecurrence(r, Appt.RECUR_BY_MONTHLY, 0, Appt.RECUR_NUMBER_NEVER);

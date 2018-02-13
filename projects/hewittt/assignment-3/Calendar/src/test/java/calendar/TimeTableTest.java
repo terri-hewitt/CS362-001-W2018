@@ -528,6 +528,8 @@ public class TimeTableTest {
         GregorianCalendar today = new GregorianCalendar(thisYear, thisMonth, thisDay);
         GregorianCalendar tomorrow = (GregorianCalendar) today.clone();
         tomorrow.add(Calendar.DAY_OF_MONTH, 1);
+		GregorianCalendar dayAfterTomorrow = (GregorianCalendar) today.clone();
+		dayAfterTomorrow.add(Calendar.DAY_OF_MONTH, 2);
 
         TimeTable timeTable = new TimeTable();
         LinkedList<CalDay> calDays = new LinkedList<CalDay>();
@@ -586,10 +588,11 @@ public class TimeTableTest {
 		/*Add an appointment to calendar*/
         listAppts.add(appt1);
         listAppts.add(appt2);
-        assertEquals(4, timeTable.getApptRange(listAppts, today, tomorrow).size());
+        assertEquals(1, timeTable.getApptRange(listAppts, today, tomorrow).size());
+		assertEquals(2, timeTable.getApptRange(listAppts, today, dayAfterTomorrow).size());
 
                 calDays = timeTable.getApptRange(listAppts, aWhileAgo, tomorrow);
         calDays.get(0).addAppt(appt1);
-        assertEquals(false, calDays.get(0).getAppts().contains(appt1));
+        assertEquals(true, calDays.get(0).getAppts().contains(appt1));
     }
 }
