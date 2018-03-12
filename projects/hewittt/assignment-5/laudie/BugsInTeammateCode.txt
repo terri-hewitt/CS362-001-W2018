@@ -1,0 +1,22 @@
+Bug Report:
+
+Bug #1: Located in Appt.java in isValid() function line 115. The condition to check if
+	the start hour is valid checks if the start hour is less than 0 AND greater 
+	than 23. This means that the condition will always be false so it will
+	never enter that if statement, which means any start hour will be considered
+	valid.
+
+Bug #2: Located in Appt.java in isValid() function line 124. The condition to check if
+	the start month is valid checks is the start month is between 1 and 12. This 
+	will cause an error if the start month is 12 because the array for the number of
+	days in each month only has 12 elements, meaning that trying to get a number of days 
+	at index [12] will go off the end of the array. This bug also causes the number of
+	days in each month to be incorrect, which explains why when I set the date of an
+	appointment to 1/31/xx, I received an error that the appointment was invalid.
+
+Bug #3: Located in TimeTable.java in getApptRange() function line 63. DaysDifference is
+	initially set to 1 when it should be 0. This causes the difference between two
+	dates to always be 1 more than it actually is, so when calDays.get(daysDifference)
+	is called, it will always index off of the end of the calDays array. 
+
+
